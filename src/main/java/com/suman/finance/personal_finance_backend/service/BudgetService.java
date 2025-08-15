@@ -1,6 +1,6 @@
 package com.suman.finance.personal_finance_backend.service;
 
-import com.suman.finance.personal_finance_backend.model.Budget;
+import com.suman.finance.personal_finance_backend.model.BudgetEntity;
 import com.suman.finance.personal_finance_backend.repository.BudgetRepository;
 import org.springframework.stereotype.Service;
 
@@ -15,15 +15,15 @@ public class BudgetService {
         this.budgetRepository = budgetRepository;
     }
 
-    public List<Budget> getAllBudgets() {
+    public List<BudgetEntity> getAllBudgets() {
         return budgetRepository.findAll();
     }
 
-    public Optional<Budget> getBudgetById(Long id) {
+    public Optional<BudgetEntity> getBudgetById(Long id) {
         return budgetRepository.findById(id);
     }
 
-    public Budget saveBudget(Budget budget) {
+    public BudgetEntity saveBudget(BudgetEntity budget) {
         return budgetRepository.save(budget);
     }
 

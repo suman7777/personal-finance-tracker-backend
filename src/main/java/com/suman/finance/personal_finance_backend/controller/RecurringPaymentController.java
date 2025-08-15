@@ -1,6 +1,6 @@
 package com.suman.finance.personal_finance_backend.controller;
 
-import com.suman.finance.personal_finance_backend.model.RecurringPayment;
+import com.suman.finance.personal_finance_backend.model.RecurringPaymentEntity;
 import com.suman.finance.personal_finance_backend.service.RecurringPaymentService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,24 +18,24 @@ public class RecurringPaymentController {
     }
 
     @GetMapping
-    public List<RecurringPayment> getAllRecurringPayments() {
+    public List<RecurringPaymentEntity> getAllRecurringPayments() {
         return recurringPaymentService.getAllRecurringPayments();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<RecurringPayment> getRecurringPaymentById(@PathVariable Long id) {
+    public ResponseEntity<RecurringPaymentEntity> getRecurringPaymentById(@PathVariable Long id) {
         return recurringPaymentService.getRecurringPaymentById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public RecurringPayment createRecurringPayment(@RequestBody RecurringPayment payment) {
+    public RecurringPaymentEntity createRecurringPayment(@RequestBody RecurringPaymentEntity payment) {
         return recurringPaymentService.saveRecurringPayment(payment);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<RecurringPayment> updateRecurringPayment(@PathVariable Long id, @RequestBody RecurringPayment payment) {
+    public ResponseEntity<RecurringPaymentEntity> updateRecurringPayment(@PathVariable Long id, @RequestBody RecurringPaymentEntity payment) {
         return recurringPaymentService.getRecurringPaymentById(id)
                 .map(existing -> {
                     payment.setId(id);

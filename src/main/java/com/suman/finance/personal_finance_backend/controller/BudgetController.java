@@ -1,6 +1,6 @@
 package com.suman.finance.personal_finance_backend.controller;
 
-import com.suman.finance.personal_finance_backend.model.Budget;
+import com.suman.finance.personal_finance_backend.model.BudgetEntity;
 import com.suman.finance.personal_finance_backend.service.BudgetService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,24 +18,24 @@ public class BudgetController {
     }
 
     @GetMapping
-    public List<Budget> getAllBudgets() {
+    public List<BudgetEntity> getAllBudgets() {
         return budgetService.getAllBudgets();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Budget> getBudgetById(@PathVariable Long id) {
+    public ResponseEntity<BudgetEntity> getBudgetById(@PathVariable Long id) {
         return budgetService.getBudgetById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public Budget createBudget(@RequestBody Budget budget) {
+    public BudgetEntity createBudget(@RequestBody BudgetEntity budget) {
         return budgetService.saveBudget(budget);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Budget> updateBudget(@PathVariable Long id, @RequestBody Budget budget) {
+    public ResponseEntity<BudgetEntity> updateBudget(@PathVariable Long id, @RequestBody BudgetEntity budget) {
         return budgetService.getBudgetById(id)
                 .map(existing -> {
                     budget.setId(id);

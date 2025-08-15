@@ -1,6 +1,6 @@
 package com.suman.finance.personal_finance_backend.service;
 
-import com.suman.finance.personal_finance_backend.model.Report;
+import com.suman.finance.personal_finance_backend.model.ReportEntity;
 import com.suman.finance.personal_finance_backend.repository.ReportRepository;
 import org.springframework.stereotype.Service;
 
@@ -15,15 +15,15 @@ public class ReportService {
         this.reportRepository = reportRepository;
     }
 
-    public List<Report> getAllReports() {
+    public List<ReportEntity> getAllReports() {
         return reportRepository.findAll();
     }
 
-    public Optional<Report> getReportById(Long id) {
+    public Optional<ReportEntity> getReportById(Long id) {
         return reportRepository.findById(id);
     }
 
-    public Report saveReport(Report report) {
+    public ReportEntity saveReport(ReportEntity report) {
         return reportRepository.save(report);
     }
 

@@ -1,6 +1,6 @@
 package com.suman.finance.personal_finance_backend.service;
 
-import com.suman.finance.personal_finance_backend.model.Transaction;
+import com.suman.finance.personal_finance_backend.model.TransactionEntity;
 import com.suman.finance.personal_finance_backend.repository.TransactionRepository;
 import org.springframework.stereotype.Service;
 
@@ -15,15 +15,15 @@ public class TransactionService {
         this.transactionRepository = transactionRepository;
     }
 
-    public List<Transaction> getAllTransactions() {
+    public List<TransactionEntity> getAllTransactions() {
         return transactionRepository.findAll();
     }
 
-    public Optional<Transaction> getTransactionById(Long id) {
+    public Optional<TransactionEntity> getTransactionById(Long id) {
         return transactionRepository.findById(id);
     }
 
-    public Transaction saveTransaction(Transaction transaction) {
+    public TransactionEntity saveTransaction(TransactionEntity transaction) {
         return transactionRepository.save(transaction);
     }
 

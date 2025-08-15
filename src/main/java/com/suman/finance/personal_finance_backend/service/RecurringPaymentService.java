@@ -1,6 +1,6 @@
 package com.suman.finance.personal_finance_backend.service;
 
-import com.suman.finance.personal_finance_backend.model.RecurringPayment;
+import com.suman.finance.personal_finance_backend.model.RecurringPaymentEntity;
 import com.suman.finance.personal_finance_backend.repository.RecurringPaymentRepository;
 import org.springframework.stereotype.Service;
 
@@ -15,15 +15,15 @@ public class RecurringPaymentService {
         this.recurringPaymentRepository = recurringPaymentRepository;
     }
 
-    public List<RecurringPayment> getAllRecurringPayments() {
+    public List<RecurringPaymentEntity> getAllRecurringPayments() {
         return recurringPaymentRepository.findAll();
     }
 
-    public Optional<RecurringPayment> getRecurringPaymentById(Long id) {
+    public Optional<RecurringPaymentEntity> getRecurringPaymentById(Long id) {
         return recurringPaymentRepository.findById(id);
     }
 
-    public RecurringPayment saveRecurringPayment(RecurringPayment payment) {
+    public RecurringPaymentEntity saveRecurringPayment(RecurringPaymentEntity payment) {
         return recurringPaymentRepository.save(payment);
     }
 

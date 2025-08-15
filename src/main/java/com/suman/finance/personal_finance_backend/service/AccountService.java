@@ -1,6 +1,6 @@
 package com.suman.finance.personal_finance_backend.service;
 
-import com.suman.finance.personal_finance_backend.model.Account;
+import com.suman.finance.personal_finance_backend.model.AccountEntity;
 import com.suman.finance.personal_finance_backend.repository.AccountRepository;
 import org.springframework.stereotype.Service;
 
@@ -15,15 +15,15 @@ public class AccountService {
         this.accountRepository = accountRepository;
     }
 
-    public List<Account> getAllAccounts() {
+    public List<AccountEntity> getAllAccounts() {
         return accountRepository.findAll();
     }
 
-    public Optional<Account> getAccountById(Long id) {
+    public Optional<AccountEntity> getAccountById(Long id) {
         return accountRepository.findById(id);
     }
 
-    public Account saveAccount(Account account) {
+    public AccountEntity saveAccount(AccountEntity account) {
         return accountRepository.save(account);
     }
 

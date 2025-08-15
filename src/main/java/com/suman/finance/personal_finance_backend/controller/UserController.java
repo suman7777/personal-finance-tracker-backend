@@ -1,6 +1,6 @@
 package com.suman.finance.personal_finance_backend.controller;
 
-import com.suman.finance.personal_finance_backend.model.User;
+import com.suman.finance.personal_finance_backend.model.UserEntity;
 import com.suman.finance.personal_finance_backend.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,24 +18,24 @@ public class UserController {
     }
 
     @GetMapping
-    public List<User> getAllUsers() {
+    public List<UserEntity> getAllUsers() {
         return userService.getAllUsers();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable Long id) {
+    public ResponseEntity<UserEntity> getUserById(@PathVariable Long id) {
         return userService.getUserById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public User createUser(@RequestBody User user) {
+    public UserEntity createUser(@RequestBody UserEntity user) {
         return userService.saveUser(user);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User user) {
+    public ResponseEntity<UserEntity> updateUser(@PathVariable Long id, @RequestBody UserEntity user) {
         return userService.getUserById(id)
                 .map(existing -> {
                     user.setId(id);

@@ -1,6 +1,6 @@
 package com.suman.finance.personal_finance_backend.service;
 
-import com.suman.finance.personal_finance_backend.model.User;
+import com.suman.finance.personal_finance_backend.model.UserEntity;
 import com.suman.finance.personal_finance_backend.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
@@ -15,15 +15,15 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public List<User> getAllUsers() {
+    public List<UserEntity> getAllUsers() {
         return userRepository.findAll();
     }
 
-    public Optional<User> getUserById(Long id) {
+    public Optional<UserEntity> getUserById(Long id) {
         return userRepository.findById(id);
     }
 
-    public User saveUser(User user) {
+    public UserEntity saveUser(UserEntity user) {
         return userRepository.save(user);
     }
 
@@ -31,7 +31,7 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
-    public User findByUsername(String username) {
+    public UserEntity findByUsername(String username) {
         return userRepository.findByUsername(username);
     }
 }

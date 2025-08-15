@@ -1,6 +1,6 @@
 package com.suman.finance.personal_finance_backend.controller;
 
-import com.suman.finance.personal_finance_backend.model.Account;
+import com.suman.finance.personal_finance_backend.model.AccountEntity;
 import com.suman.finance.personal_finance_backend.service.AccountService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,24 +18,24 @@ public class AccountController {
     }
 
     @GetMapping
-    public List<Account> getAllAccounts() {
+    public List<AccountEntity> getAllAccounts() {
         return accountService.getAllAccounts();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Account> getAccountById(@PathVariable Long id) {
+    public ResponseEntity<AccountEntity> getAccountById(@PathVariable Long id) {
         return accountService.getAccountById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public Account createAccount(@RequestBody Account account) {
+    public AccountEntity createAccount(@RequestBody AccountEntity account) {
         return accountService.saveAccount(account);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Account> updateAccount(@PathVariable Long id, @RequestBody Account account) {
+    public ResponseEntity<AccountEntity> updateAccount(@PathVariable Long id, @RequestBody AccountEntity account) {
         return accountService.getAccountById(id)
                 .map(existing -> {
                     account.setId(id);
