@@ -58,3 +58,4 @@ public class TransactionService {
                                                       Double minAmount, Double maxAmount) {
         return transactionRepository.searchTransactions(category, type, description, notes, startDate, endDate, minAmount, maxAmount);
     }
+}

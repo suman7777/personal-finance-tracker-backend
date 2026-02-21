@@ -5,7 +5,9 @@ import com.suman.finance.personal_finance_backend.service.ReportService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/reports")
@@ -17,6 +19,7 @@ public class ReportController {
         this.reportService = reportService;
     }
 
+    // CRUD Operations
     @GetMapping
     public List<ReportEntity> getAllReports() {
         return reportService.getAllReports();
@@ -51,5 +54,58 @@ public class ReportController {
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.notFound().build();
+    }
+
+    // ENHANCED REPORT ENDPOINTS
+
+    // 1. Income vs Expense Report
+    @GetMapping("/analysis/income-expense")
+    public ResponseEntity<Map<String, Object>> getIncomeExpenseReport(
+            @RequestParam LocalDate startDate,
+            @RequestParam LocalDate endDate) {
+        Map<String, Object> report = reportService.getIncomeExpenseReport(startDate, endDate);
+        return ResponseEntity.ok(report);
+    }
+
+    // 2. Category-wise Expense Report
+    @GetMapping("/analysis/category-wise")
+    public ResponseEntity<Map<String, Object>> getCategoryWiseReport(
+            @RequestParam LocalDate startDate,
+            @RequestParam LocalDate endDate) {
+        Map<String, Object> report = reportService.getCategoryWiseReport(startDate, endDate);
+        return ResponseEntity.ok(report);
+    }
+
+    // 3. Budget vs Actual Report
+    @GetMapping("/analysis/budget-vs-actual")
+    public ResponseEntity<Map<String, Object>> getBudgetVsActualReport(
+            @RequestParam LocalDate startDate,
+            @RequestParam LocalDate endDate) {
+        Map<String, Object> report = reportService.getBudgetVsActualReport(startDate, endDate);
+        return ResponseEntity.ok(report);
+    }
+
+    // 4. Summary Report
+    @GetMapping("/analysis/summary")
+    public ResponseEntity<Map<String, Object>> getSummaryReport(
+            @RequestParam LocalDate startDate,
+            @RequestParam LocalDate endDate) {
+        Map<String, Object> report = reportService.getSummaryReport(startDate, endDate);
+        return ResponseEntity.ok(report);
+    }
+
+    // 5. Recent Reports
+    @GetMapping("/recent")
+    public ResponseEntity<List<ReportEntity>> getRecentReports(
+            @RequestParam(defaultValue = "5") int limit) {
+        List<ReportEntity> reports = reportService.getRecentReports(limit);
+        return ResponseEntity.ok(reports);
+    }
+
+    // 6. Reports by Type
+    @GetMapping("/type/{type}")
+    public ResponseEntity<List<ReportEntity>> getReportsByType(@PathVariable String type) {
+        List<ReportEntity> reports = reportService.getReportsByType(type);
+        return ResponseEntity.ok(reports);
     }
 }
