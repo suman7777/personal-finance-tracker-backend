@@ -5,6 +5,7 @@ import com.suman.finance.personal_finance_backend.service.TransactionService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -51,5 +52,20 @@ public class TransactionController {
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<TransactionEntity>> searchTransactions(
+            @RequestParam(required = false) String category,
+            @RequestParam(required = false) String type,
+            @RequestParam(required = false) String description,
+            @RequestParam(required = false) String notes,
+            @RequestParam(required = false) LocalDate startDate,
+            @RequestParam(required = false) LocalDate endDate,
+            @RequestParam(required = false) Double minAmount,
+            @RequestParam(required = false) Double maxAmount) {
+        List<TransactionEntity> results = transactionService.searchTransactions(
+                category, type, description, notes, startDate, endDate, minAmount, maxAmount);
+        return ResponseEntity.ok(results);
     }
 }
